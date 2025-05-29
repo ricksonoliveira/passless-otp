@@ -1,0 +1,107 @@
+{
+  "info": {
+    "version": "1.0",
+    "title": "Passless API"
+  },
+  "definitions": {
+    "OTP": {
+      "description": "OTP for phone number verification",
+      "example": {
+        "code": "123456",
+        "expires_at": "2025-05-29T18:41:59Z",
+        "phone_number": "1234567890",
+        "user": {
+          "id": "1",
+          "phone_number": "1234567890"
+        }
+      },
+      "properties": {
+        "code": {
+          "description": "OTP code",
+          "type": "string"
+        },
+        "expires_at": {
+          "description": "OTP expiration time",
+          "type": "string"
+        },
+        "phone_number": {
+          "description": "Phone number",
+          "type": "string"
+        },
+        "user": {
+          "description": "User",
+          "type": "object"
+        }
+      },
+      "title": "OTP",
+      "type": "object"
+    }
+  },
+  "paths": {
+    "/auth/request_otp": {
+      "get": {
+        "description": "",
+        "operationId": "PasslessWeb.API.V1.AuthController.request_otp",
+        "parameters": [
+          {
+            "description": "Phone number",
+            "in": "query",
+            "name": "phone_number",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP sent successfully"
+          },
+          "400": {
+            "description": "Missing phone number"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/verify_otp": {
+      "post": {
+        "description": "",
+        "operationId": "PasslessWeb.API.V1.AuthController.verify_otp",
+        "parameters": [
+          {
+            "description": "Phone number",
+            "in": "query",
+            "name": "phone_number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "OTP code",
+            "in": "query",
+            "name": "code",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP verified successfully"
+          },
+          "400": {
+            "description": "Missing phone number or OTP code"
+          },
+          "401": {
+            "description": "Invalid OTP code"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}
