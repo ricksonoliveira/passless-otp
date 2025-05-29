@@ -132,10 +132,32 @@ priv/                       # Private files (migrations, static files)
 - Phoenix Swagger - API documentation
 - Cachex - Caching
 
-## 🚀 Deployment
+## 🧪 Testing
 
-For production deployment, please refer to the [Phoenix deployment guide](https://hexdocs.pm/phoenix/deployment.html).
+### Running Tests
 
-## 📄 License
+To run the entire test suite:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```bash
+mix test
+```
+
+### Test Coverage
+
+The test suite includes comprehensive tests for both API endpoints:
+
+1. **OTP Request Endpoint** (`/api/v1/auth/request_otp`):
+
+   - Tests for successful OTP request with valid phone number
+   - Tests for error handling with invalid phone number format
+   - Tests for missing phone number parameter
+
+2. **OTP Verification Endpoint** (`/api/v1/auth/verify_otp`):
+   - Tests for successful OTP verification
+   - Tests for error handling with invalid OTP code
+   - Tests for expired OTP codes
+   - Tests for non-existent user verification
+
+All tests are implemented as integration tests, verifying the complete request/response cycle from the API endpoint through the authentication context to the database.
+
+Cheers! 🍷
